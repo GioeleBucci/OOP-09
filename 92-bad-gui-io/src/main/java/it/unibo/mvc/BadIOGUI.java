@@ -79,6 +79,8 @@ public class BadIOGUI {
         try (BufferedReader br = new BufferedReader(new FileReader(PATH, StandardCharsets.UTF_8))) {
           System.out.println(br.readLine());
         } catch (IOException exception) {
+          JOptionPane.showMessageDialog(frame, exception, "Error", JOptionPane.ERROR_MESSAGE);
+          exception.printStackTrace(); // NOPMD: allowed as this is just an exercise
         }
       }
     });
