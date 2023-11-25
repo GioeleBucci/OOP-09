@@ -45,9 +45,7 @@ public final class SimpleGUI {
       controller.printNextString();
     });
 
-    historyBtn.addActionListener(e -> {
-      textArea.setText(controller.getHistory().toString());
-    });
+    historyBtn.addActionListener(e -> textArea.setText(controller.getHistory().toString()));
   }
 
   public void display() {
