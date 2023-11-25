@@ -14,7 +14,7 @@ public class Controller {
   private File file = defaultFile();
 
   private File defaultFile() {
-    return new File(System.getProperty("user.home") + File.pathSeparator + DEFAULT_FILE_NAME);
+    return new File(System.getProperty("user.home") + System.getProperty("file.separator") + DEFAULT_FILE_NAME);
   }
 
   /**
@@ -47,8 +47,8 @@ public class Controller {
    * @param data the text to write in the file
    */
   public void writeOnFile(String data) throws IOException {
-    try (PrintStream ps = new PrintStream(data, StandardCharsets.UTF_8)) {
-      ps.print(data);
+    try (PrintStream ps = new PrintStream(file, StandardCharsets.UTF_8)) {
+      ps.println(data);
     }
   }
 

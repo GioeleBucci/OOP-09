@@ -8,6 +8,7 @@ import javax.swing.JTextArea;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 /**
  * A very simple program using a graphical interface.
@@ -19,16 +20,24 @@ public final class SimpleGUI {
 
   private final JFrame frame = new JFrame();
 
-  public SimpleGUI() {
+  public SimpleGUI(Controller controller) {
     frame.setTitle("My first Java graphical interface");
     final JPanel canvas = new JPanel();
     canvas.setLayout(new BorderLayout());
-    final JTextArea textArea = new JTextArea();
+    final JTextArea textArea = new JTextArea("Write here your text");
+    canvas.add(textArea, BorderLayout.CENTER);
     final JButton saveBtn = new JButton("Save");
-    canvas.add(textArea);
     canvas.add(saveBtn, BorderLayout.SOUTH);
     frame.setContentPane(canvas);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    saveBtn.addActionListener(e -> {
+      try {
+        controller.writeOnFile(textArea.getText());
+      } catch (IOException e1) {
+        e1.printStackTrace();
+      }
+    });
   }
 
   public void display() {
@@ -41,6 +50,6 @@ public final class SimpleGUI {
   }
 
   public static void main(String[] args) {
-    new SimpleGUI().display();
+    new SimpleGUI(new Controller()).display();
   }
 }
